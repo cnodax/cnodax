@@ -11,6 +11,6 @@ const { createItem } = require("../controllers/images")
 
 // router.delete("/:id", validatorGetItem, deleteItem)
 
-router.post("/",uploader.single("myfile"), createItem)
+router.post("/",uploader.single("file"), createItem)
 
 module.exports = router

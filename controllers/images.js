@@ -44,8 +44,9 @@ const createItem = async (req, res) => {
     console.log(file)
     const fileData = {
       filename: file.filename,
-      url:`${PUBLIC_URL}/${file.filename}`
-
+      url:`${PUBLIC_URL}/${file.filename}`,
+      principal: 1,
+      product_id: 1
     }
     const data = await imagesModel.create(fileData);
     res.status(201)

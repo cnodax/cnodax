@@ -1,7 +1,7 @@
 const { matchedData } = require("express-validator");
-const { productsModel } = require("../models")
+const { productsModel, imagesModel } = require("../models")
 const { handleError } = require("../utils/handleError");
-
+const PUBLIC_URL = process.env.PUBLIC_URL
 /**
  * Obtener registros!
  * @param {*} req
@@ -43,9 +43,21 @@ const createItem = async (req, res) => {
   try { 
     const body  = matchedData(req)
     const data = await productsModel.create(body)
-    res.send({ data })
+    // TODO - luego de crear el producto asociar las imagenes
+    // if(data){  
+    //   const { file} = req
+    //   const fileData = {
+    //     filename: file.filename,
+    //     url:`${PUBLIC_URL}/${file.filename}`,
+    //     principal: 1,
+    //     producto_id: data.id
+    //   }
+    //   const dataf = await imagesModel.create(fileData)
+    //   if(!dataf) throw Error(`Image not created to product: ${id}`)   
+    // }
+    res.send({data})
   } catch (e) {
-    console.log(e)
+    console.info(e)
     handleError(res, "ERROR_CREATE_PRODUCTS")
   }
 }
